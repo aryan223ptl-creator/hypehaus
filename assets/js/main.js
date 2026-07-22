@@ -495,40 +495,4 @@
 })(jQuery);
 
 const widget = document.getElementById('music-widget');
-const audio = document.getElementById('bg-audio');
-const audioSource = document.getElementById('audio-source');
-const playBtn = document.getElementById('music-toggle-btn');
-const icon = document.getElementById('music-icon');
-const trackSelect = document.getElementById('track-select');
 
-// Toggle Play / Pause
-playBtn.addEventListener('click', (e) => {
-    e.stopPropagation(); // Prevents conflict with select dropdown click
-    if (audio.paused) {
-        audio.play();
-        widget.classList.add('playing');
-        icon.className = 'fa fa-pause';
-    } else {
-        audio.pause();
-        widget.classList.remove('playing');
-        icon.className = 'fa fa-play';
-    }
-});
-
-// Switch Tracks Dynamically
-trackSelect.addEventListener('change', function() {
-    const wasPlaying = !audio.paused;
-    
-    audio.pause();
-    audioSource.src = this.value;
-    audio.load();
-    
-    if (wasPlaying) {
-        audio.play();
-    }
-});
-
-// Prevent dropdown click event from triggering parent elements
-trackSelect.addEventListener('click', (e) => {
-    e.stopPropagation();
-});
